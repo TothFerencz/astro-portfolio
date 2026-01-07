@@ -1,0 +1,74 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const works = await getCollection('works') as CollectionEntry<'works'>[];
+---
+<section>
+  <div class="mx-auto max-w-7xl px-6 py-20">
+    <!-- Header -->
+    <div class="mb-10 flex items-center gap-3">
+      <span class="h-3 w-3 rounded-full bg-black"></span>
+      <h2 class="text-lg font-semibold">Selected Works</h2>
+    </div>
+
+    <div class="border-t border-black">
+      {works.map((work) => (
+        <a
+          href={`/works/${work.slug}`}
+          class="group block border-b border-black py-10"
+        >
+          <article class="grid grid-cols-1 gap-6 md:grid-cols-[1fr_2fr]">
+            <!-- Left -->
+            <div>
+              <div class="text-sm text-gray-500">[ {work.data.year} ]</div>
+              <h3 class="mt-2 text-xl font-semibold">
+                {work.data.title}
+              </h3>
+            </div>
+
+            <!-- Right (desktop) -->
+            <div class="relative hidden items-center justify-center md:flex">
+              <!-- Hover images -->
+              <div
+                class="pointer-events-none absolute top-1/2 left-1/2 flex gap-4
+                       -translate-x-1/2 -translate-y-1/2 translate-y-6
+                       opacity-0 transition-all duration-300
+                       group-hover:translate-y-0
+                       group-hover:opacity-100"
+              >
+                {work.data.images.map((img: string) => (
+                  <img
+                    src={img}
+                    alt={work.data.title}
+                    class="h-32 w-32 object-cover"
+                  />
+                ))}
+              </div>
+
+              <!-- Service -->
+              <div class="ml-auto text-sm font-medium">
+                {work.data.service}
+              </div>
+            </div>
+
+            <!-- Mobile -->
+            <div class="mt-4 md:hidden">
+              <div class="mb-3 text-sm font-medium">
+                {work.data.service}
+              </div>
+              <div class="flex gap-4">
+                {work.data.images.map((img: string) => (
+                  <img
+                    src={img}
+                    alt={work.data.title}
+                    class="h-28 w-28 object-cover"
+                  />
+                ))}
+              </div>
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

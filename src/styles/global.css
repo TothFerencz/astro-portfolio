@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: "Poppins", ui-sans-serif, system-ui;
+    color: #111827; /* gray-900 */
+  }
+
+  h1 {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.65;
+    color: #374151; /* gray-700 */
+  }
+
+  a {
+    font-weight: 500;
+    font-size: 0.9375rem; /* 15px */
+  }
+}

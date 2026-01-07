@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+---
+
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mb-10 flex items-center gap-3">
+      <span class="h-3 w-3 rounded-full bg-black"></span>
+      <h2 class="text-lg font-semibold">Articles & Resources</h2>
+    </div>
+
+    <div class="grid gap-10 md:grid-cols-3">
+      {posts.map(post => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="group block"
+        >
+          <img
+            src={post.data.cover}
+            alt={post.data.title}
+            class="mb-4 h-56 w-full object-cover"
+          />
+
+          <div class="mb-2 text-sm opacity-70">
+            {post.data.date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })} ✦ {post.data.category}
+          </div>
+
+          <h3 class="text-lg font-semibold leading-snug">
+            {post.data.title}
+          </h3>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

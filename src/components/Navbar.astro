@@ -1,0 +1,153 @@
+<header class="relative w-full">
+  <!-- Top bar -->
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+    <!-- Left -->
+    <div class="flex items-center gap-3">
+      <img
+        src="/emoji.png"
+        alt="Avatar"
+        class="h-10 w-10 rounded-full"
+        loading="eager"
+      />
+      <div class="leading-tight">
+        <div class="text-lg font-semibold">Alexander</div>
+        <div class="text-sm text-gray-500">UI UX DESIGNER</div>
+      </div>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden items-center gap-10 md:flex">
+      <a href="#about" class="nav-link font-medium">ABOUT ME</a>
+      <a href="#works" class="nav-link font-medium">WORKS</a>
+      <a href="#articles" class="nav-link font-medium">ARTICLES</a>
+      <a href="#reviews" class="nav-link font-medium">REVIEWS</a>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <div class="hidden md:block">
+      <a href="#contact" class="group inline-flex items-center">
+        <!-- Text pill (kisebb) -->
+        <span
+          class="rounded-full border border-black px-4 py-2 text-sm font-medium
+                 transition group-hover:bg-black group-hover:text-white"
+        >
+          Let’s Talk
+        </span>
+
+        <!-- Emoji -->
+        <span
+          class="-ml-2 flex h-9 w-9 items-center justify-center rounded-full
+                 bg-black text-sm text-white transition group-hover:bg-lime-300"
+        >
+          👋
+        </span>
+      </a>
+    </div>
+
+    <!-- Mobile Button -->
+    <button id="menu-btn" class="md:hidden" aria-label="Toggle menu">
+      <svg
+        id="hamburger"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+      >
+        <line x1="3" y1="6" x2="21" y2="6" class="line top" />
+        <line x1="3" y1="12" x2="21" y2="12" class="line middle" />
+        <line x1="3" y1="18" x2="21" y2="18" class="line bottom" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div
+    id="mobile-menu"
+    class="absolute left-0 top-full z-40 w-full origin-top
+           scale-y-95 opacity-0 pointer-events-none
+           bg-white px-6 pb-8 pt-6 shadow-lg transition-all duration-300
+           md:hidden"
+  >
+    <nav class="flex flex-col gap-8 text-lg font-semibold">
+      <a href="#about" class="nav-link">ABOUT ME</a>
+      <a href="#works" class="nav-link">WORKS</a>
+      <a href="#articles" class="nav-link">ARTICLES</a>
+      <a href="#reviews" class="nav-link">REVIEWS</a>
+    </nav>
+
+    <!-- Mobile CTA -->
+    <a href="#contact" class="group mt-10 inline-flex items-center">
+      <span
+        class="rounded-full border border-black px-4 py-2 text-sm font-medium
+               transition group-hover:bg-black group-hover:text-white"
+      >
+        Let’s Talk
+      </span>
+      <span
+        class="-ml-2 flex h-9 w-9 items-center justify-center rounded-full
+               bg-black text-sm text-white transition group-hover:bg-lime-300"
+      >
+        👋
+      </span>
+    </a>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('hamburger');
+
+  if (btn && menu && icon) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('opacity-0');
+      menu.classList.toggle('scale-y-95');
+      menu.classList.toggle('pointer-events-none');
+      icon.classList.toggle('open');
+    });
+  }
+</script>
+
+<style>
+  /* Hamburger */
+  .line {
+    stroke: black;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  .open .top {
+    transform: rotate(45deg) translateY(6px);
+  }
+
+  .open .middle {
+    opacity: 0;
+  }
+
+  .open .bottom {
+    transform: rotate(-45deg) translateY(-6px);
+  }
+
+  /* Nav underline animation */
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: black;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+</style>

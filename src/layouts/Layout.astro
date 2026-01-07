@@ -1,14 +1,40 @@
+---                            
+  import '../styles/global.css'  
+  import Navbar from '../components/Navbar.astro'
+  import Hero from '../components/Hero.astro'
+  import MyResume from '../components/MyResume.astro'
+  import MyWorks from '../components/MyWorks.astro'
+  import Socials from '../components/Socials.astro'
+  import About from '../components/About.astro'
+  import Skills from '../components/Skills.astro'
+  import BlogPosts from '../components/BlogPosts.astro'
+  import Footer from '../components/Footer.astro'
+---  
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+  		href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+  		rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<slot />
+		<Navbar />
+		<Hero />
+		<MyResume />
+		<MyWorks />
+		<Socials />
+		<About />
+		<Skills />
+		<BlogPosts />
+		<Footer />
 	</body>
 </html>
 

@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+
+const skills = await getCollection('skills');
+---
+
+<section class="bg-[#C9FF4D]">
+  <div class="mx-auto max-w-7xl px-6 py-20">
+    <!-- Header -->
+    <div class="mb-14 flex items-center gap-3">
+      <span class="h-3 w-3 rounded-full bg-black"></span>
+      <h2 class="text-lg font-semibold">
+        Skills & Experience
+      </h2>
+    </div>
+
+    <!-- List -->
+    <div class="divide-y divide-black">
+      {skills.map((item) => (
+        <div
+          class="
+            grid grid-cols-1 gap-2 py-8
+            md:grid-cols-3
+            md:items-center
+          "
+        >
+          <!-- Company (LEFT) -->
+          <div class="text-lg font-semibold">
+            {item.data.company}
+          </div>
+
+          <!-- Role (CENTERED) -->
+          <div class="text-base font-medium md:text-center">
+            {item.data.role}
+          </div>
+
+          <!-- Year (RIGHT) -->
+          <div class="text-base font-medium md:text-right">
+            {item.data.startYear}
+            {item.data.endYear ? ` – ${item.data.endYear}` : ' – Present'}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
