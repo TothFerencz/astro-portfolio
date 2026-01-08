@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'tothferencz.com',
+  site: 'https://tothferencz.com',
   output: 'static',
   adapter: vercel(),
   integrations: [sitemap()],
