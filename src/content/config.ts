@@ -8,9 +8,10 @@ const works = defineCollection({
     tools: z.array(z.string()),
     service: z.string(),
     images: z.array(z.string()),
-    liveUrl: z.string().optional(),
+    liveUrl: z.string().url().optional(),
   }),
 });
+
 const skills = defineCollection({
   schema: z.object({
     company: z.string(),
@@ -29,10 +30,19 @@ const blog = defineCollection({
   }),
 });
 
-
+const seo = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    canonical: z.string().url(),
+    ogImage: z.string().url(),
+  }),
+});
 
 export const collections = {
   works,
   skills,
-  blog
+  blog,
+  seo,
 };

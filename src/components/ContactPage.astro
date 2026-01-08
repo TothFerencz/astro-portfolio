@@ -1,0 +1,102 @@
+<section class="pt-32 pb-32">
+  <div class="mx-auto max-w-7xl px-6">
+    <!-- Header -->
+    <header class="mb-24 grid items-start gap-16 md:grid-cols-2">
+      <div>
+        <div class="mb-6 flex items-center gap-3 text-sm">
+          <span class="h-3 w-3 rounded-full bg-black"></span>
+          <span>Contact us</span>
+        </div>
+
+        <h1>
+          Greet me with a 'Hi!' and<br />
+          share your idea.
+        </h1>
+      </div>
+      <div />
+    </header>
+  </div>
+
+  <!-- Content -->
+  <div class="mx-auto max-w-7xl grid gap-16 px-6 md:grid-cols-2 md:items-stretch">
+    <!-- LEFT IMAGE -->
+    <div class="hidden md:block">
+      <img
+        src="/contact.png"
+        alt="Contact"
+        class="h-full w-full rounded-lg object-cover"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- FORM -->
+    <form
+      method="POST"
+      action="/api/contact"
+      class="flex h-full flex-col space-y-10"
+    >
+      <!-- Honeypot -->
+      <input
+        type="text"
+        name="website"
+        tabindex="-1"
+        autocomplete="off"
+        class="hidden"
+      />
+
+      <div>
+        <label class="block text-sm font-medium">Name</label>
+        <input
+          name="name"
+          required
+          placeholder="Your name here"
+          class="mt-2 w-full border-b border-black bg-transparent py-2 outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium uppercase">
+          Email address
+        </label>
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Enter your email"
+          class="mt-2 w-full border-b border-black bg-transparent py-2 outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium uppercase">
+          Subject
+        </label>
+        <input
+          name="subject"
+          placeholder="Subject"
+          class="mt-2 w-full border-b border-black bg-transparent py-2 outline-none"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium uppercase">
+          Message
+        </label>
+        <textarea
+          name="message"
+          required
+          rows="4"
+          placeholder="Type your message..."
+          class="mt-2 w-full resize-none border-b border-black bg-transparent py-2 outline-none"
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="mt-auto self-start rounded-full border border-black px-6 py-3 text-sm font-medium transition hover:bg-black hover:text-white"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>

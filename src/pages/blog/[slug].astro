@@ -12,8 +12,18 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const title = `${post.data.title} – Toth Ferencz`;
+const description = post.data.title;
+const canonical = `https://tothferencz.com/blog/${post.slug}`;
+const ogImage = `https://tothferencz.com${post.data.cover}`;
 ---
-<BlogLayout>
+<BlogLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+>
   <article class="mx-auto max-w-7xl px-6 py-16">
     <div class="mb-6 text-sm opacity-60">
       {post.data.category} ✦ {post.data.date.toLocaleDateString('en-US')}

@@ -5,13 +5,9 @@ import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
 
-const sorted = posts.sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
 
-const [featured, ...rest] = sorted;
 ---
 
-<Layout>
-  <ArticlePage featured={featured} posts={rest} />
+<Layout title="Articles">
+  <ArticlePage posts={posts} />
 </Layout>

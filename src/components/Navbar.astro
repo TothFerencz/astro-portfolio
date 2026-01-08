@@ -1,4 +1,4 @@
-<header class="relative w-full">
+<header class="fixed top-0 left-0 z-50 w-full bg-white">
   <!-- Top bar -->
   <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
     <!-- Left -->
@@ -20,12 +20,12 @@
       <a href="/about" class="nav-link">ABOUT ME</a>
       <a href="/works" class="nav-link">WORKS</a>
       <a href="/articles" class="nav-link">ARTICLES</a>
-      <a href="/reviews" class="nav-link">REVIEWS</a>
+      <a href="/contact" class="nav-link">CONTACT</a>
     </nav>
 
     <!-- Desktop CTA -->
     <div class="hidden md:block">
-      <a href="/#contact" class="group inline-flex items-center">
+      <a href="/contact" class="group inline-flex items-center">
         <span
           class="rounded-full border border-black px-4 py-2 text-sm font-medium
                  transition group-hover:bg-black group-hover:text-white"
@@ -63,11 +63,11 @@
       <a href="/about" class="nav-link">ABOUT ME</a>
       <a href="/works" class="nav-link">WORKS</a>
       <a href="/articles" class="nav-link">ARTICLES</a>
-      <a href="/reviews" class="nav-link">REVIEWS</a>
+      <a href="/contact" class="nav-link">CONTACT</a>
     </nav>
 
     <!-- Mobile CTA -->
-    <a href="/#contact" class="group mt-10 inline-flex items-center">
+    <a href="/contact" class="group mt-10 inline-flex items-center">
       <span
         class="rounded-full border border-black px-4 py-2 text-sm font-medium
                transition group-hover:bg-black group-hover:text-white"
@@ -97,9 +97,24 @@
       icon.classList.toggle('open');
     });
   }
+
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll<HTMLAnchorElement>('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    if (
+      (href === '/' && currentPath === '/') ||
+      (href !== '/' && currentPath.startsWith(href))
+    ) {
+      link.classList.add('is-active');
+    }
+  });
 </script>
 
 <style>
+  /* Hamburger */
   .line {
     stroke: black;
     stroke-width: 2.5;
@@ -120,6 +135,7 @@
     transform: rotate(-45deg) translateY(-6px);
   }
 
+  /* Nav underline */
   .nav-link {
     position: relative;
   }
@@ -137,7 +153,15 @@
     transition: transform 0.3s ease;
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.is-active::after {
     transform: scaleX(1);
+  }
+
+  /* Mobile: no underline */
+  @media (max-width: 767px) {
+    .nav-link::after {
+      display: none;
+    }
   }
 </style>
