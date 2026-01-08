@@ -14,9 +14,17 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 const title = `${post.data.title} – Toth Ferencz`;
-const description = post.data.title;
+const descriptionFromBody = post.body
+  .replace(/!?\[[^\]]*\]\([^)]+\)/g, '')
+  .replace(/[#_*`>~-]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 160);
+const description = descriptionFromBody || post.data.title;
 const canonical = `https://tothferencz.com/blog/${post.slug}`;
-const ogImage = `https://tothferencz.com${post.data.cover}`;
+const ogImage = post.data.cover.startsWith('http')
+  ? post.data.cover
+  : `https://tothferencz.com${post.data.cover}`;
 ---
 <BlogLayout
   title={title}

@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactPage from '../components/ContactPage.astro';
+
+const title = 'Contact';
+const description = 'Get in touch for freelance work, projects, or questions.';
 ---
 
-<Layout title="Contact">
+<Layout title={title} description={description}>
   <ContactPage />
 </Layout>

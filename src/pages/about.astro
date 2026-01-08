@@ -3,8 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import AboutMe from '../components/AboutMe.astro';
 import Skills from '../components/Skills.astro';
 import BlogPosts from '../components/BlogPosts.astro';
+const title = 'About Me';
+const description =
+  'Background, skills, and experience of Toth Ferencz, full-stack developer.';
 ---
-<Layout title="About Me">
+<Layout title={title} description={description}>
   <AboutMe />
   <Skills />
   <BlogPosts />

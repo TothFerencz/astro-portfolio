@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const title = 'Thank You';
+const description = 'Your message was sent successfully.';
 ---
 
-<Layout title="Thank You">
+<Layout title={title} description={description}>
   <section class="flex min-h-screen flex-col items-center justify-center text-center">
     <h1 class="mb-4 text-4xl font-semibold">
       Message successfully sent

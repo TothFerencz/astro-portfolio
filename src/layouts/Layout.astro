@@ -19,10 +19,15 @@ const seo = seoEntry?.data ?? {
   ogImage: 'https://tothferencz.com/og-image.jpg',
 };
 
+const canonicalBase = seo.canonical.endsWith('/')
+  ? seo.canonical
+  : `${seo.canonical}/`;
+const defaultCanonical = new URL(Astro.url.pathname, canonicalBase).toString();
+
 const {
   title = seo.title,
   description = seo.description,
-  canonical = seo.canonical,
+  canonical = defaultCanonical,
   ogImage = seo.ogImage,
 } = Astro.props;
 ---

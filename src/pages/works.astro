@@ -4,7 +4,10 @@ import WorkPage from '../components/WorkPage.astro';
 import { getCollection } from 'astro:content';
 
 const works = await getCollection('works');
+const title = 'Works';
+const description =
+  'Selected projects, case studies, and client work by Toth Ferencz.';
 ---
-<Layout title="Works">
+<Layout title={title} description={description}>
   <WorkPage works={works} />
 </Layout>

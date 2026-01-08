@@ -4,10 +4,12 @@ import ArticlePage from '../components/ArticlePage.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
-
+const title = 'Articles';
+const description =
+  'Latest articles and notes on web development, Astro, and full-stack work.';
 
 ---
 
-<Layout title="Articles">
+<Layout title={title} description={description}>
   <ArticlePage posts={posts} />
 </Layout>

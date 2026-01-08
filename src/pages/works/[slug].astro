@@ -12,9 +12,28 @@ export async function getStaticPaths() {
 
 const { work } = Astro.props;
 const { Content } = await work.render();
+
+const title = `${work.data.title} – Toth Ferencz`;
+const descriptionFromBody = work.body
+  .replace(/!?\[[^\]]*\]\([^)]+\)/g, '')
+  .replace(/[#_*`>~-]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 160);
+const description = descriptionFromBody || work.data.title;
+const canonical = `https://tothferencz.com/works/${work.slug}`;
+const primaryImage = work.data.images[0];
+const ogImage = primaryImage?.startsWith('http')
+  ? primaryImage
+  : `https://tothferencz.com${primaryImage ?? ''}`;
 ---
 
-<Layout>
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+>
 
   <!-- HERO -->
   <section class="mx-auto max-w-7xl px-6 pt-32 pb-16">
