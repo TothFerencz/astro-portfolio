@@ -3,9 +3,15 @@ import { sendContactEmail } from '../../lib/sendContactEmail';
 
 export const prerender = false;
 
+// KÖTELEZŐ serverless mailhez
+export const config = {
+  runtime: 'nodejs',
+};
+
 export const POST: APIRoute = async ({ request }) => {
   const formData = await request.formData();
 
+  // Honeypot
   if (formData.get('website')) {
     return new Response(null, { status: 204 });
   }
@@ -19,12 +25,17 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response('Invalid input', { status: 400 });
   }
 
-  await sendContactEmail({
-    name: String(name),
-    email: String(email),
-    subject: subject ? String(subject) : undefined,
-    message: String(message),
-  });
+  try {
+    await sendContactEmail({
+      name: String(name),
+      email: String(email),
+      subject: subject ? String(subject) : undefined,
+      message: String(message),
+    });
+  } catch (err) {
+    console.error('Contact email failed:', err);
+    return new Response('Email send failed', { status: 500 });
+  }
 
   return new Response(null, {
     status: 303,
