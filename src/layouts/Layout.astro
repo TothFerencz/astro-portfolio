@@ -4,6 +4,7 @@ import '../styles/global.css';
 
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '@vercel/analytics/astro'
 
 /**
  * Global SEO defaults
@@ -80,6 +81,7 @@ const {
   </head>
 
   <body class="antialiased">
+    <Analytics/>
     <Navbar />
 
     <main>
