@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import { sendContactEmail } from '../../lib/sendContactEmail';
 
-export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   const formData = await request.formData();
