@@ -33,15 +33,17 @@
     <form
       method="POST"
       action="/api/contact"
+      enctype="multipart/form-data"
       class="flex h-full flex-col space-y-10"
     >
-      <!-- Honeypot -->
+      <!-- Honeypot (NOT display:none) -->
       <input
         type="text"
         name="website"
         tabindex="-1"
         autocomplete="off"
-        class="hidden"
+        aria-hidden="true"
+        class="absolute left-[-9999px]"
       />
 
       <div>
