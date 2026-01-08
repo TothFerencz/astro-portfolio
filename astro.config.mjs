@@ -6,7 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://tothferencz.com',
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: true,
+  }),
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
