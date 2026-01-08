@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const featured = posts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+---
+
+<section class="py-32 border-t border-black">
+  <div class="mx-auto max-w-7xl px-6">
+
+    <!-- LABEL -->
+    <div class="mb-16 flex items-center gap-3">
+      <span class="h-3 w-3 rounded-full bg-black"></span>
+      <span>Featured Post</span>
+    </div>
+
+    <article class="grid gap-20 md:grid-cols-[1.3fr_1fr] items-start">
+
+      <!-- IMAGE -->
+      <a
+        href={`/blog/${featured.slug}`}
+        class="block overflow-hidden rounded-2xl"
+      >
+        <img
+          src={featured.data.cover}
+          alt={featured.data.title}
+          class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </a>
+
+      <!-- CONTENT -->
+      <div class="pt-6 md:pt-12">
+
+        <div class="mb-6 text-gray-500">
+          {featured.data.date.toLocaleDateString('en-US')} &nbsp;◆&nbsp; {featured.data.category}
+        </div>
+
+        <h2 class="mb-16">
+          {featured.data.title}
+        </h2>
+
+        <a
+          href={`/blog/${featured.slug}`}
+          class="inline-block tracking-wide"
+        >
+          [ Read More ]
+        </a>
+
+      </div>
+
+    </article>
+  </div>
+</section>

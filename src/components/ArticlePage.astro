@@ -1,0 +1,92 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  featured: CollectionEntry<'blog'>;
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { featured, posts } = Astro.props;
+---
+
+<section class="pt-32 pb-32">
+  <div class="mx-auto max-w-7xl px-6">
+    <!-- Header -->
+    <header class="mb-24 grid items-start gap-16 md:grid-cols-2">
+      <div>
+        <p class="mb-6 flex items-center gap-3 text-sm">
+          <span class="h-3 w-3 rounded-full bg-black"></span>
+          Articles & Resources
+        </p>
+
+        <h1>
+          Checkout our latest Articles & Resources.
+        </h1>
+      </div>
+      <div />
+    </header>
+
+    <!-- Featured -->
+    <section class="mb-20">
+      <p class="mb-6 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-black"></span>
+        Featured Post
+      </p>
+
+      <article class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Image -->
+        <a href={`/blog/${featured.slug}`} class="block">
+          <img
+            src={featured.data.cover}
+            alt={featured.data.title}
+            class="rounded-xl w-full object-cover"
+          />
+        </a>
+
+        <!-- Content -->
+        <div class="self-start">
+          <p class="text-gray-500 mb-2">
+            {featured.data.date.toLocaleDateString()} · {featured.data.category}
+          </p>
+
+          <h2 class="mb-4">
+            <a href={`/blog/${featured.slug}`} class="hover:underline">
+              {featured.data.title}
+            </a>
+          </h2>
+
+          <a
+            href={`/blog/${featured.slug}`}
+            class="inline-block mt-2 underline"
+          >
+            Read article
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- List -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map(post => (
+        <article class="border rounded-xl p-5 hover:shadow transition">
+          <p class="text-gray-500 mb-2">
+            {post.data.date.toLocaleDateString()} · {post.data.category}
+          </p>
+
+          <h3 class="mb-3">
+            <a href={`/blog/${post.slug}`} class="hover:underline">
+              {post.data.title}
+            </a>
+          </h3>
+
+          <a
+            href={`/blog/${post.slug}`}
+            class="underline"
+          >
+            Read more
+          </a>
+        </article>
+      ))}
+    </section>
+  </div>
+</section>

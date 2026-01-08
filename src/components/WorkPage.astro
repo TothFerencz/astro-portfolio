@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Socials from '../components/Socials.astro';
 
 interface Props {
   works: CollectionEntry<'works'>[];
@@ -21,33 +22,32 @@ const { works } = Astro.props;
           <span>My Works</span>
         </div>
 
-        <h1 class="text-5xl font-bold leading-tight">
+        <h1>
           Checkout our latest and<br />
           creative works.
         </h1>
       </div>
 
-      <!-- RIGHT PREVIEW -->
-      <div class="hidden justify-end gap-6 md:flex">
+      <!-- RIGHT PREVIEW (NAGYOBB KÉPEK) -->
+      <div class="hidden justify-end gap-8 md:flex">
         {works.slice(0, 3).map((work) => (
           <img
             src={work.data.images[0]}
             alt={work.data.title}
-            class="h-28 w-28 rounded-lg object-cover"
+            class="h-48 w-48 rounded-2xl object-cover"
             loading="lazy"
           />
         ))}
       </div>
+
     </div>
   </div>
 
-  <!-- SOCIAL (FULL WIDTH) -->
-  <div class="mb-32">
-    <slot name="social" />
-  </div>
+  <!-- SOCIAL -->
+  <Socials />
 
   <!-- WORK LIST -->
-  <div class="mx-auto max-w-7xl px-6 space-y-40">
+  <div class="mx-auto max-w-7xl px-6 mt-32 space-y-40">
 
     {works.map((work) => (
       <a
@@ -58,11 +58,11 @@ const { works } = Astro.props;
 
           <!-- LEFT META -->
           <div>
-            <h2 class="mb-4 text-3xl font-semibold">
+            <h2 class="mb-4">
               {work.data.title}
             </h2>
 
-            <p class="mb-10 max-w-md text-gray-600 leading-relaxed">
+            <p class="mb-10 max-w-md">
               {work.body.slice(0, 140)}...
             </p>
 
@@ -90,25 +90,37 @@ const { works } = Astro.props;
           </div>
 
           <!-- RIGHT IMAGES -->
-          <div
-            class="
-              grid
-              gap-8
-              grid-cols-1
-              md:grid-cols-2
-            "
-          >
-            {work.data.images.slice(0, 2).map((img) => (
-              <div class="overflow-hidden rounded-xl">
+          {work.data.images.length === 1 ? (
+
+            <!-- SINGLE IMAGE -->
+            <div class="flex items-center justify-center">
+              <div class="w-full max-w-xl overflow-hidden rounded-xl">
                 <img
-                  src={img}
+                  src={work.data.images[0]}
                   alt={work.data.title}
-                  class="h-full w-full object-cover"
+                  class="w-full object-cover"
                   loading="lazy"
                 />
               </div>
-            ))}
-          </div>
+            </div>
+
+          ) : (
+
+            <!-- MULTI IMAGE -->
+            <div class="grid gap-8 grid-cols-1 md:grid-cols-2">
+              {work.data.images.slice(0, 2).map((img) => (
+                <div class="overflow-hidden rounded-xl">
+                  <img
+                    src={img}
+                    alt={work.data.title}
+                    class="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+
+          )}
 
         </article>
       </a>

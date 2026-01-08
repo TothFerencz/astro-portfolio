@@ -3,72 +3,102 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 const works = await getCollection('works') as CollectionEntry<'works'>[];
 ---
+
 <section>
   <div class="mx-auto max-w-7xl px-6 py-20">
+
     <!-- Header -->
     <div class="mb-10 flex items-center gap-3">
       <span class="h-3 w-3 rounded-full bg-black"></span>
-      <h2 class="text-lg font-semibold">Selected Works</h2>
+      <h2>Selected Works</h2>
     </div>
 
     <div class="border-t border-black">
       {works.map((work) => (
         <a
           href={`/works/${work.slug}`}
-          class="group block border-b border-black py-10"
+          class="group block border-b border-black"
         >
-          <article class="grid grid-cols-1 gap-6 md:grid-cols-[1fr_2fr]">
-            <!-- Left -->
-            <div>
-              <div class="text-sm text-gray-500">[ {work.data.year} ]</div>
-              <h3 class="mt-2 text-xl font-semibold">
+          <!-- BORDER-KÖZ -->
+          <div class="relative py-24">
+
+            <!-- GRID (DESKTOP META) -->
+            <div class="hidden md:grid md:grid-cols-[1fr_2fr] items-center">
+              <div>
+                <div class="text-sm text-gray-500">
+                  [ {work.data.year} ]
+                </div>
+                <h3 class="mt-2">
+                  {work.data.title}
+                </h3>
+              </div>
+              <div />
+            </div>
+
+            <!-- TITLE (MOBILE) -->
+            <div class="md:hidden">
+              <h3>
                 {work.data.title}
               </h3>
             </div>
 
-            <!-- Right (desktop) -->
-            <div class="relative hidden items-center justify-center md:flex">
-              <!-- Hover images -->
+            <!-- RIGHT LAYER (DESKTOP ONLY) -->
+            <div class="absolute right-0 inset-y-0 hidden md:flex items-center">
+
+              <!-- SERVICE -->
               <div
-                class="pointer-events-none absolute top-1/2 left-1/2 flex gap-4
-                       -translate-x-1/2 -translate-y-1/2 translate-y-6
-                       opacity-0 transition-all duration-300
-                       group-hover:translate-y-0
-                       group-hover:opacity-100"
+                class="
+                  text-sm
+                  font-medium
+                  transition-all
+                  duration-300
+                  ease-out
+                  group-hover:-translate-y-8
+                  group-hover:opacity-0
+                "
               >
-                {work.data.images.map((img: string) => (
-                  <img
-                    src={img}
-                    alt={work.data.title}
-                    class="h-32 w-32 object-cover"
-                  />
-                ))}
-              </div>
-
-              <!-- Service -->
-              <div class="ml-auto text-sm font-medium">
                 {work.data.service}
               </div>
+
+              <!-- IMAGE (HOVER) -->
+              <div
+                class="
+                  pointer-events-none
+                  absolute
+                  right-0
+                  opacity-0
+                  translate-y-16
+                  transition-all
+                  duration-300
+                  ease-out
+                  group-hover:opacity-100
+                  group-hover:translate-y-0
+                  max-h-full
+                  w-[320px]
+                "
+              >
+                <img
+                  src={work.data.images[0]}
+                  alt={work.data.title}
+                  class="max-h-full w-full object-contain"
+                />
+              </div>
+
             </div>
 
-            <!-- Mobile -->
-            <div class="mt-4 md:hidden">
-              <div class="mb-3 text-sm font-medium">
-                {work.data.service}
-              </div>
-              <div class="flex gap-4">
-                {work.data.images.map((img: string) => (
-                  <img
-                    src={img}
-                    alt={work.data.title}
-                    class="h-28 w-28 object-cover"
-                  />
-                ))}
-              </div>
+            <!-- MOBILE IMAGE -->
+            <div class="mt-6 md:hidden">
+              <img
+                src={work.data.images[0]}
+                alt={work.data.title}
+                class="w-full rounded-lg object-cover"
+              />
             </div>
-          </article>
+
+          </div>
         </a>
       ))}
     </div>
+
   </div>
 </section>
