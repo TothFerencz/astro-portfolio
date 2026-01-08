@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://tothferencz.com',
-  output: 'static',
+  output: 'hybrid',
   adapter: vercel({
     webAnalytics: true,
   }),
