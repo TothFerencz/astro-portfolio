@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorkPage from '../components/WorkPage.astro';
+import { getCollection } from 'astro:content';
+
+const works = await getCollection('works');
+---
+<Layout title="Works">
+  <WorkPage works={works} />
+</Layout>

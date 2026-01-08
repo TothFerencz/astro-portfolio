@@ -1,22 +1,26 @@
 ---
-title: E-commerce Redesign
+title: "E-commerce Redesign"
 year: 2024
-client: Internal Project
-tools: [Figma, Astro]
-service: UI Design
+client: "Fashion House Co. (Paris)"
+tools: ["Sketch", "InVision"]
+service: "UI Design"
 images:
-  - /works/ecommerce-redesign/1.jpg
-  - /works/ecommerce-redesign/2.jpg
-  - /works/ecommerce-redesign/3.jpg
+  - /works/main.jpg
+  - /works/side-1.jpg
+  - /works/side-2.jpg
+liveUrl: https://example.com
 ---
-
 
 ## Project Overview
 
-A complete redesign of an e-commerce platform focusing on performance,
-conversion, and accessibility.
+Each phase presents its own set of challenges, but with thorough research...
 
-### Design Goals
-- Improve UX
-- Increase conversion
-- Mobile-first approach
+## Research Phase
+
+- **User Research**: Conducting interviews...
+- **Competitive Analysis**: Analyzing competitors...
+- **Market Analysis**: Assessing trends...
+
+## Design Phase
+
+Information Architecture structuring content...

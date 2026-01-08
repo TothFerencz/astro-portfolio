@@ -1,0 +1,168 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map(work => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await work.render();
+---
+<Layout>
+  <Navbar />
+
+  <!-- HERO -->
+  <section class="mx-auto max-w-7xl px-6 pt-32 pb-16">
+    <div class="mb-4 flex items-center gap-3 text-sm">
+      <span class="h-3 w-3 rounded-full bg-black"></span>
+      <span>My Works</span>
+    </div>
+
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <h1 class="text-4xl font-bold">
+        {work.data.title}
+      </h1>
+
+      <a href="/#works" class="text-sm font-medium">
+        [ Back to Work ]
+      </a>
+    </div>
+  </section>
+
+  <!-- META STRIP -->
+  <section class="bg-black text-white">
+    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 md:grid-cols-4">
+      <div>
+        <div class="mb-1 text-xs opacity-60">CLIENT</div>
+        <div class="font-medium">{work.data.client}</div>
+      </div>
+
+      <div>
+        <div class="mb-1 text-xs opacity-60">TOOLS</div>
+        <div class="font-medium">
+          {work.data.tools.join(', ')}
+        </div>
+      </div>
+
+      <div>
+        <div class="mb-1 text-xs opacity-60">YEAR</div>
+        <div class="font-medium">{work.data.year}</div>
+      </div>
+
+      <div>
+        <div class="mb-1 text-xs opacity-60">SERVICE</div>
+        <div class="font-medium">{work.data.service}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="mx-auto max-w-7xl px-6 py-20">
+    <div class="grid gap-6 md:grid-cols-[2fr_1fr]">
+      <img
+        src={work.data.images[0]}
+        alt={work.data.title}
+        class="w-full rounded-lg object-cover"
+      />
+
+      <div class="grid gap-6">
+        {work.data.images.slice(1).map((img: string) => (
+          <img
+            src={img}
+            alt={work.data.title}
+            class="w-full rounded-lg object-cover"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  {work.data.liveUrl && (
+    <section class="mx-auto max-w-5xl px-6 pb-24">
+      <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <span class="text-sm font-medium">
+          GO TO LIVE THIS PROJECT!
+        </span>
+
+        <a
+          href={work.data.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center"
+        >
+          <span
+            class="rounded-full border border-black px-4 py-2 text-sm font-medium
+                   transition group-hover:bg-black group-hover:text-white"
+          >
+            Visit Website
+          </span>
+
+          <span
+            class="-ml-2 flex h-9 w-9 items-center justify-center rounded-full
+                   bg-black text-sm text-white transition group-hover:bg-lime-300"
+          >
+            🔗
+          </span>
+        </a>
+      </div>
+
+      <!-- BORDER ALUL -->
+      <div class="mt-10 border-b border-black"></div>
+    </section>
+  )}
+
+  <!-- CONTENT (LEFT, VERY SPACIOUS CASE STUDY) -->
+  <section class="mx-auto max-w-5xl px-6 pb-32">
+    <div
+      class="
+        prose
+        prose-neutral
+        max-w-none
+
+        /* SECTION TITLES */
+        prose-h2:text-2xl
+        prose-h2:font-semibold
+        prose-h2:mt-24
+        prose-h2:mb-6
+
+        /* SUB SECTIONS */
+        prose-h3:text-xl
+        prose-h3:font-semibold
+        prose-h3:mt-16
+        prose-h3:mb-4
+
+        /* PARAGRAPHS */
+        prose-p:text-gray-600
+        prose-p:leading-loose
+        prose-p:mb-8
+
+        /* LISTS */
+        prose-ul:mt-6
+        prose-ul:mb-10
+        prose-li:mt-4
+        prose-li:leading-relaxed
+        prose-li:text-gray-600
+
+        /* STRONG */
+        prose-strong:text-black
+        prose-strong:font-medium
+
+        /* IMAGES */
+        prose-img:my-16
+        prose-img:rounded-lg
+      "
+    >
+      <Content />
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

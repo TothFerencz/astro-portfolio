@@ -8,9 +8,9 @@ const works = defineCollection({
     tools: z.array(z.string()),
     service: z.string(),
     images: z.array(z.string()),
+    liveUrl: z.string().optional(),
   }),
 });
-
 const skills = defineCollection({
   schema: z.object({
     company: z.string(),
